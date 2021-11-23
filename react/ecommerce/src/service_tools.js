@@ -1,19 +1,19 @@
-export const fetcher = async (url,method = "GET",data={}) => {
+export const fetcher = async (url, method = "GET", data = {}) => {
     const token = localStorage.getItem("token") || ""
     const body = JSON.stringify(data)
-    const headers =  {
+    const headers = {
         "Authorization": `Bearer ${token}`,
         "X-CSRFToken": token,
         'Content-Type': 'application/json'
     }
     var opts
-    if(method === "GET"){
+    if (method === "GET") {
         opts = {
             method,
             cors: true,
             headers
         }
-    } else{
+    } else {
         opts = {
             method,
             body,

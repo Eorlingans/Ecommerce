@@ -41,18 +41,18 @@ function GridArmas() {
                                 <Product
                                     key={producto.id}
                                     id={producto.id}
-                                    arm_catergoria={producto.arm_catergoria_nombre}
-                                    arm_nombre={producto.arm_nombre}
-                                    arm_precio={producto.arm_precio}
-                                    arm_foto={producto.arm_foto}
-                                    arm_valoracion={producto.arm_valoracion}
-                                    arm_descripcion={producto.arm_descripcion}
-                                    arm_origen={producto.arm_origen}
+                                    arm_catergoria={producto.arm_catergory_name}
+                                    arm_nombre={producto.arm_name}
+                                    arm_precio={producto.arm_price}
+                                    arm_foto={producto.arm_picture}
+                                    arm_valoracion={producto.arm_assessment}
+                                    arm_descripcion={producto.arm_description}
+                                    arm_origen={producto.arm_origin}
                                     arm_calibre={producto.arm_calibre}
-                                    arm_velocidad={producto.arm_velocidad}
-                                    arm_tiemporecarga={producto.arm_tiemporecarga}
-                                    arm_capacidad={producto.arm_capacidad}
-                                    arm_peso={producto.arm_peso}
+                                    arm_velocidad={producto.arm_speed}
+                                    arm_tiemporecarga={producto.arm_rechargetime}
+                                    arm_capacidad={producto.arm_capacity}
+                                    arm_peso={producto.arm_weight}
                                 />
 
                             </Grid>

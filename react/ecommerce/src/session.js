@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import {createContext} from "react";
 
 export const SessionContext = createContext(null);
 
@@ -15,7 +15,7 @@ export const SessionContextProvider = ({children}) => {
         localStorage.removeItem("token")
         localStorage.removeItem("user_is_staff")
     }
-    const values = { isLoggedIn, isUserStaff, Logout }
+    const values = {isLoggedIn, isUserStaff, Logout}
     return (
         <SessionContext.Provider value={values}>
             {children}

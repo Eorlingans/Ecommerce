@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { StateProvider } from './StateProvider';
-import reducer, { initialState } from './reducer';
+import {StateProvider} from './StateProvider';
+import reducer, {initialState} from './reducer';
 import {SessionContextProvider} from "./session";
 
 ReactDOM.render(
-  <React.StrictMode>
-      <SessionContextProvider>
-        <StateProvider initialState={ initialState } reducer = {reducer}>
-          <App />
-        </StateProvider>
-      </SessionContextProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <SessionContextProvider>
+            <StateProvider initialState={initialState} reducer={reducer}>
+                <App/>
+            </StateProvider>
+        </SessionContextProvider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

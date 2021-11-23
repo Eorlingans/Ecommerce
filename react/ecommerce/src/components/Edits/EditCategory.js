@@ -1,13 +1,7 @@
 import React, {useCallback, useEffect, useRef, useState} from "react";
 import {fetcher} from "../../service_tools";
 import {Button, Col, Form, Row} from "react-bootstrap"
-import {Alert,
-        Dialog,
-        DialogActions,
-        DialogContent,
-        DialogContentText,
-        DialogTitle,
-        Slide} from "@mui/material";
+import {Alert, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide} from "@mui/material";
 import './Edits.css'
 
 

@@ -1,9 +1,10 @@
-.App{
-    padding:10px;
+.App {
+    padding: 10px;
     min-width: 0;
     height: 120vh;
     background-image: url('https://cdn.cloudflare.steamstatic.com/steam/apps/730/page_bg_generated_v6b.jpg?t=1631908705');
 }
+
 .navbar a {
     text-decoration: none !important;
 }

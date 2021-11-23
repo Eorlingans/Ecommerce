@@ -1,19 +1,19 @@
 * {
- 
-  margin: 0px;
-  padding: 0px;
-  font-family: 'Quantico','Changa','Noto Sans',sans-serif !important;
+
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Quantico', 'Changa', 'Noto Sans', sans-serif !important;
 }
 
 body {
-  margin: 0px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color:rgba(0, 0, 0, 0.87);
+    margin: 0px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: rgba(0, 0, 0, 0.87);
 
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
