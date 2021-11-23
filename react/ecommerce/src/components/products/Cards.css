@@ -1,0 +1,11 @@
+.Card {
+    /* margin-top: 6px; */
+    background-color: rgba(0, 0, 0, 0.87);
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+.Producto {
+    margin-top: 5px;
+
+}

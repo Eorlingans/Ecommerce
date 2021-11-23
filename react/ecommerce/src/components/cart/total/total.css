@@ -1,0 +1,30 @@
+.cont-total {
+    display: flex;
+    justify-content: center;
+}
+
+.container-pago {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.total {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid darkgreen;
+    border-radius: 4px;
+    width: 30%;
+    background-color: darkolivegreen;
+    display: flex;
+    justify-content: center;
+}
+
+
+.total hgroup {
+    color: black
+}
+
+.button {
+    background-color: #555555;
+}

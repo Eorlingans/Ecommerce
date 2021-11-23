@@ -1,0 +1,19 @@
+.enConstruccion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.enConstruccion h1 {
+    margin-top: 15px;
+    width: 650px;
+    height: 350px;
+    background-color: black;
+    color: #FBCF2A;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

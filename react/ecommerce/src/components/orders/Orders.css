@@ -1,0 +1,21 @@
+.Table {
+    width: 70%;
+
+}
+
+.Container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.87);
+    padding-top: 20px;
+}
+
+button {
+    background-color: #FBCF2A;
+    padding: 2px 6px;
+    border: none;
+    border-radius: 4px;
+
+}
+

@@ -1,0 +1,35 @@
+
+.registro {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    justify-content: center;
+
+}
+
+.formularioRegistro {
+    width: 505px;
+    margin-top: 2px;
+    padding: 5px;
+    border: 1px solid #FBCF2A;
+    border-radius: 4px;
+    color: #FBCF2A
+}
+
+
+.formularioLogin {
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #FBCF2A;
+    border-radius: 4px;
+    color: #FBCF2A
+
+}
+
+
+.ButtonSubmit {
+    margin-top: 10px;
+    justify-self: center;
+}

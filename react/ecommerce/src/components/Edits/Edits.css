@@ -1,0 +1,12 @@
+.editCategory {
+
+    display: flex;
+    justify-content: center;
+}
+
+.box {
+    min-width: 22rem;
+    width: 60%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
