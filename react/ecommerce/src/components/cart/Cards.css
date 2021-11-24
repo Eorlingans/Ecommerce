@@ -15,7 +15,7 @@
 .shoppingcart {
     border: 1px solid yellow;
     border-radius: 5px;
-    background-color: grey;
+    background-color: rgba(0, 0, 0, 0.3);
     color: yellow;
     display: flex;
     justify-content: center;

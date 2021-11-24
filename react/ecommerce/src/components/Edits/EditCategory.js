@@ -24,6 +24,7 @@ export const EditCategory = () => {
 
     // Agregar nueva categoria
     const handleClickOpen = () => {
+        setInfo("")
         setNewCategory("")
         setOpen(true);
     };
@@ -44,15 +45,9 @@ export const EditCategory = () => {
         fetcher('http://127.0.0.1:8000/api/v1/categorias')
             .then(data => {
                 console.log(data)
-                if (data.length === 0 || !data) {
-                    setCategoriesId([])
-                    setCategoryToEditId(-1)
-                    return
-                }
+                setCategoriesId([])
+                setCategoryToEditId(0)
                 setCategoriesId(data)
-                if (data.length > 0) {
-                    setCategoryToEditId(data[2].id)
-                }
             })
             .catch(err => {
                 setSeverity("error")
@@ -77,11 +72,33 @@ export const EditCategory = () => {
                 console.log(res)
                 setSeverity("success")
                 setInfo("Categoria eliminada correctamente!")
-                loadCategories()
+                setTimeout(() => {
+                    loadCategories()
+                }, 1500)
             }).catch(err => {
+
             setSeverity("error")
-            setInfo(`Error: ${err}`)
-            console.log(err)
+            //Convierto el String del error a entero
+            const error_nro = parseInt(err.message)
+
+            if(isNaN(error_nro)) { //Si es NaN porque no es un entero
+                setSeverity("error")
+                setInfo(`${err}`)
+                console.log("Error eliminar categoria: ", err)
+            }
+
+            console.log(error_nro)
+
+            //Manejo la respuesta segun el numero de error
+            switch (error_nro) {
+                case 500:
+                    setInfo(`No se puede borrar la categoria, hay productos asociados: ${err}`)
+                    break
+                case 401:
+                    setInfo(`Debe volver a iniciar sesion: ${err}`)
+                    console.log("ERROR 401")
+                    break
+            }
         })
 
     }
@@ -104,6 +121,7 @@ export const EditCategory = () => {
                 console.log(res)
                 setSeverity("success")
                 setInfo("Categoria modificada correctamente!")
+                loadCategories()
             }).catch(err => {
             setSeverity("error")
             setInfo(`Error: ${err}`)
@@ -143,6 +161,7 @@ export const EditCategory = () => {
                 setSeverity("success")
                 setNewInfo("Categoria agregada correctamente!")
                 setTimeout(() => {
+                    loadCategories()
                     handleClose()
                 }, 500)
             }).catch(err => {
@@ -196,7 +215,7 @@ export const EditCategory = () => {
                     >
                         Update Category
                     </Button>
-                    <Button variant='warning' type="submit" className="ButtonSubmit" onClick={(e) => {
+                    <Button variant='danger' type="submit" className="ButtonSubmit" onClick={(e) => {
                         setAction("delete")
                     }} disabled={categoriesId === 0}
                     >
@@ -232,6 +251,7 @@ export const EditCategory = () => {
                                         <Form.Label>Name</Form.Label>
                                         <Form.Control
                                             ref={inputNewCategoryRef}
+                                            autoFocus
                                             placeholder="Enter Category" value={newCategory}
                                             onChange={({target: {value}}) => {
                                                 setNewCategory(value)

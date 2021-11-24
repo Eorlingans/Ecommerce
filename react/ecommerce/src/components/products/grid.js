@@ -41,7 +41,7 @@ function GridArmas() {
                                 <Product
                                     key={producto.id}
                                     id={producto.id}
-                                    arm_catergoria={producto.arm_catergory_name}
+                                    arm_catergoria={producto.arm_category_name}
                                     arm_nombre={producto.arm_name}
                                     arm_precio={producto.arm_price}
                                     arm_foto={producto.arm_picture}

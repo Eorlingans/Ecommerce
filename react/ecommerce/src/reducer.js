@@ -1,8 +1,10 @@
 export const initialState = {
+    //Inicializo el basket sin elementos
     basket: [],
 }
 
 export const actionTypes = {
+    //Agrego las acciones
     ADD_TO_BASKET: "ADD_TO_BASKET",
     REMOVE_ITEM: "REMOVE_ITEM",
 }
