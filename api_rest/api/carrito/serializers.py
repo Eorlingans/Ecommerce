@@ -2,7 +2,7 @@ from django.db.models import fields
 from rest_framework import serializers
 
 from profiles.serializers import UserSerializer
-from .models import category, weapon, Order, detallePedido
+from .models import category, weapon, Order, orderdetail
 
 
 class categoriaSerializer(serializers.ModelSerializer):
@@ -18,19 +18,19 @@ class weaponSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'id',
-            'arm_catergoria',
-            'arm_catergoria_nombre',
-            'arm_nombre',
-            'arm_precio',
-            'arm_origen',
+            'arm_category',
+            'arm_category_name',
+            'arm_name',
+            'arm_price',
+            'arm_origin',
             'arm_calibre',
-            'arm_capacidad',
-            'arm_peso',
-            'arm_velocidad',
-            'arm_tiemporecarga',
-            'arm_descripcion',
-            'arm_valoracion',
-            'arm_foto'
+            'arm_capacity',
+            'arm_weight',
+            'arm_speed',
+            'arm_rechargetime',
+            'arm_description',
+            'arm_assessment',
+            'arm_picture'
 
         )
         model = weapon
@@ -39,14 +39,15 @@ class weaponSerializer(serializers.ModelSerializer):
 class detailsOrder(serializers.ModelSerializer):
     # order = orderSerializer(read_only=True)
     # order = serializers.PrimaryKeyRelatedField(read_only=True)
-    articulo_pedido = weaponSerializer(read_only=True)
+    order_article = weaponSerializer(read_only=True)
 
     class Meta:
-        fields = ["id","articulo_pedido"]
-        model = detallePedido
+        fields = ["id",
+                  "order_article"]
+        model = orderdetail
 
     def get_id_articulo(self):
-        return  self.articulo_pedido.id
+        return  self.order_article.id
 
 
 
@@ -92,8 +93,8 @@ class createOrder(serializers.ModelSerializer):
 
 class detailCreateOrder(serializers.ModelSerializer):
     class Meta:
-        fields = ["id","articulo_pedido","order"]
-        model = detallePedido
+        fields = ["id","order_article","order"]
+        model = orderdetail
 
 class createOrderDetails(serializers.Serializer):
     details = detailCreateOrder(many=True)
@@ -104,6 +105,6 @@ class createOrderDetails(serializers.Serializer):
             "details":[]
         }
         for detalle in data:
-            res = detallePedido.objects.create(**detalle)
+            res = orderdetail.objects.create(**detalle)
             rta["details"].append(res)
         return rta

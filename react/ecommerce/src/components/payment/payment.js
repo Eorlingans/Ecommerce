@@ -1,10 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
+import {fetcher} from "../../service_tools";
 import Cleave from 'cleave.js/react';
 
 import 'animate.css';
 import './payment.css';
 import {SessionContext} from "../../session";
 import {useHistory} from "react-router-dom";
+import {useStateValue} from "../../StateProvider";
 
 const imageUrls = [
     "https://logos-world.net/wp-content/uploads/2020/04/Visa-Logo.png",
@@ -16,6 +18,7 @@ const imageUrls = [
 ]
 
 function Payment() {
+    const [{basket}, dispatch] = useStateValue();
     const [creditCardNum, setCreditCardNum] = useState('');
     const [cardType, setCardType] = useState('')
     const [CVV, setCVV] = useState('');
@@ -35,6 +38,41 @@ function Payment() {
         // console.log(e.target.value);
     }
 
+    const handleCreateDetailsOrder = (order_id, cbOnRes) => {
+        const data = {
+            details: basket.map(b => {
+                return {
+                    order_article: b.id,
+                    order: order_id
+                }
+            })
+        }
+        console.log("details", data)
+        fetcher(`http://127.0.0.1:8000/api/v1/createdetails`, "POST", data)
+            .then(res=>{
+                console.log("createdetails>>",res)
+                cbOnRes()
+            })
+            .catch(err=>{
+                console.log("createdetails[error]>>",err)
+            })
+    }
+    const handleCreateOrder = () => {
+        const order_user = localStorage.getItem("user_id") || 0
+        console.log(order_user, basket)
+        fetcher(`http://127.0.0.1:8000/api/v1/createorder`, "POST", {order_user})
+            .then(res =>{
+                console.log("createorder>>",res)
+                if(res.id && res.id > 0){
+                    handleCreateDetailsOrder(res.id,()=>{
+                        console.log("end create")
+                    })
+                }
+            })
+            .catch(err=>{
+                console.log("createorder[error]>>",err)
+            })
+    }
     const handleType = (type) => {
         setCardType(type);
         console.log(type);
@@ -77,6 +115,7 @@ function Payment() {
     // cleave.js logic
     const handlePayment = (e) => {
         e.preventDefault()
+        /*
         if (creditCardNum === "") {
             alert("Debes ingresar un nro de tarjeta")
             return
@@ -93,6 +132,7 @@ function Payment() {
             alert("Debes ingresar su clave")
             return
         }
+
         const data = {
             creditCardNum,
             cardType,
@@ -100,7 +140,10 @@ function Payment() {
             expireMonth,
             expireYear
         }
+
         console.log(data)
+        */
+        handleCreateOrder()
     }
     return (
         <div className="containerpayment">

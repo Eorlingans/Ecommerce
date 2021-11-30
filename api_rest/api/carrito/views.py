@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework import authentication, status
-from carrito.models import category, weapon, Order, detallePedido
+from carrito.models import category, weapon, Order, orderdetail
 from django.shortcuts import render
 from rest_framework import generics, serializers
 from rest_framework.response import Response
@@ -41,42 +41,42 @@ class Pistolas(generics.ListAPIView):
     serializer_class = weaponSerializer
 
     def get_queryset(self):
-        return weapon.objects.filter(arm_catergoria=1)
+        return weapon.objects.filter(arm_category=1)
 
 
 class Shotguns(generics.ListAPIView):
     serializer_class = weaponSerializer
 
     def get_queryset(self):
-        return weapon.objects.filter(arm_catergoria=2)
+        return weapon.objects.filter(arm_category=2)
 
 
 class Submachines(generics.ListAPIView):
     serializer_class = weaponSerializer
 
     def get_queryset(self):
-        return weapon.objects.filter(arm_catergoria=3)
+        return weapon.objects.filter(arm_category=3)
 
 
 class Rifles(generics.ListAPIView):
     serializer_class = weaponSerializer
 
     def get_queryset(self):
-        return weapon.objects.filter(arm_catergoria=4)
+        return weapon.objects.filter(arm_category=4)
 
 
 class Machineguns(generics.ListAPIView):
     serializer_class = weaponSerializer
 
     def get_queryset(self):
-        return weapon.objects.filter(arm_catergoria=5)
+        return weapon.objects.filter(arm_category=5)
 
 
 class Equipment(generics.ListAPIView):
     serializer_class = weaponSerializer
 
     def get_queryset(self):
-        return weapon.objects.filter(arm_catergoria=6)
+        return weapon.objects.filter(arm_category=6)
 
 
 class Orders(generics.RetrieveDestroyAPIView):
@@ -92,7 +92,7 @@ class OrderDetail(generics.RetrieveDestroyAPIView):
     serializer_class = detailsOrder
 
     def get_queryset(self):
-        return detallePedido.objects.all()
+        return orderdetail.objects.all()
 
 
 @permission_classes([permissions.IsAdminUser])
@@ -120,4 +120,4 @@ class CreateOrder(generics.CreateAPIView):
 
 class CreateOrderDetails(generics.CreateAPIView):
     serializer_class = createOrderDetails
-    queryset = detallePedido.objects.all()
+    queryset = orderdetail.objects.all()

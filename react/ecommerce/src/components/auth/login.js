@@ -52,6 +52,9 @@ function Login() {
                     localStorage.removeItem("user_is_staff")
                     localStorage.setItem("user_is_staff", (json.is_staff) ? "1" : "0")
 
+                    localStorage.removeItem("user_id")
+                    localStorage.setItem("user_id", (json.user_id) ? json.user_id : "0")
+
                     localStorage.removeItem("token")
                     localStorage.setItem("token", json.access)
 

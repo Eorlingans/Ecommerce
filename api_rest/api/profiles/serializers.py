@@ -15,7 +15,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         data = super().validate(attrs)
         # agrego lo que necesito agregar
         data["is_staff"] = self.user.is_staff
-
+        data["user_id"] = self.user.id
         return data
 
 class UserSerializer(serializers.ModelSerializer):

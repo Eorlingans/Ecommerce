@@ -27,26 +27,28 @@ function OrderArticles() {
                     <th colSpan="5">ARTICLES</th>
                 </tr>
                 <tr>
-                    <th>#Art</th>
-                    <th>Nombre</th>
-                    <th>Categoria</th>
-                    <th>Origen</th>
-                    <th>Precio</th>
+                    <th>#</th>
+                    <th>Article</th>
+                    <th>Category</th>
+                    <th>Origin</th>
+                    <th>Price</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 {
-                    data && data.details.map((orden) =>
-                        <tr key={orden.articulo_pedido.id}>
-                            <td>{orden.articulo_pedido.id}</td>
-                            <td>{orden.articulo_pedido.arm_nombre}</td>
-                            <td>{orden.articulo_pedido.arm_catergoria_nombre}</td>
-                            <td>{orden.articulo_pedido.arm_origen}</td>
-                            <td>{orden.articulo_pedido.arm_precio}</td>
-
+                    data && data.details.map((orden) => {
+                        const { id, arm_name, arm_category_name, arm_origin, arm_price } = orden.order_article
+                        return (
+                            <tr key={id}>
+                            <td>{id}</td>
+                            <td>{arm_name}</td>
+                            <td>{arm_category_name}</td>
+                            <td>{arm_origin}</td>
+                            <td>{arm_price}</td>
                         </tr>
-                    )
+                        )
+                    })
                 }
 
 

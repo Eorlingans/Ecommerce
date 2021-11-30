@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
                 ('arm_valoracion', models.IntegerField(null=True)),
                 ('arm_descripcion', models.TextField(max_length=280, null=True)),
                 ('arm_foto', models.TextField(null=True)),
-                ('arm_catergoria', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='carrito.category')),
+                ('arm_catergory', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='carrito.category')),
             ],
         ),
     ]
