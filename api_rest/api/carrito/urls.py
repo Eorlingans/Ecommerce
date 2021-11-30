@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import listCategorias,  Orders, OrderDetail, ListOrdersAdmin, ListOrdersUser, \
-    editCategorias
+from .views import listCategorias, Orders, OrderDetail, ListOrdersAdmin, ListOrdersUser, \
+    editCategorias, CreateOrder, CreateOrderDetails
 from .views import listArmas,DetailArmas
 from .views import Pistolas,Shotguns,Submachines,Rifles,Machineguns,Equipment
 
@@ -12,6 +12,8 @@ urlpatterns = [
     path('listordersadmin/', ListOrdersAdmin.as_view(), name='orders'),
     path('listorders/', ListOrdersUser.as_view(), name='orders'),
     path('orders/<int:pk>/', Orders.as_view(), name='orders'),
+    path('createorder', CreateOrder.as_view(), name= 'create-order'),
+    path('createdetails', CreateOrderDetails.as_view(), name= 'create-details'),
     path('ordersDetails/<int:pk>/', OrderDetail.as_view(), name='orders' ),
     path('armas/<int:pk>/', DetailArmas.as_view(), name='unarma'),
     path('Pistolas/', Pistolas.as_view(), name='pistols'),

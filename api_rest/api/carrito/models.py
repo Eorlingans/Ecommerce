@@ -50,7 +50,6 @@ class Order(models.Model):
 
 
 class detallePedido(models.Model):
-
     # Desde aca identifico mediante realated name como lo voy a nombrar desde order, en el serializer
     # no se agrega en el modelo, unicamente en el serializer
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='details')

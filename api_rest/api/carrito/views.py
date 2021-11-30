@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
-from rest_framework import authentication
+from rest_framework import authentication, status
 from carrito.models import category, weapon, Order, detallePedido
 from django.shortcuts import render
 from rest_framework import generics, serializers
@@ -8,7 +8,8 @@ from rest_framework.response import Response
 from rest_framework import permissions
 
 
-from .serializers import weaponSerializer, orderSerializer, detailsOrder, ListOrdersSerializer, categoriaSerializer
+from .serializers import weaponSerializer, orderSerializer, detailsOrder, ListOrdersSerializer, categoriaSerializer, \
+    createOrder, createOrderDetails, detailCreateOrder
 
 
 class listCategorias(generics.ListCreateAPIView):
@@ -112,3 +113,11 @@ class ListOrdersUser(generics.ListAPIView):
         print(user)
         return Order.objects.filter(order_user_id=user)
 
+
+class CreateOrder(generics.CreateAPIView):
+    serializer_class = createOrder
+    queryset = Order.objects.all()
+
+class CreateOrderDetails(generics.CreateAPIView):
+    serializer_class = createOrderDetails
+    queryset = detallePedido.objects.all()

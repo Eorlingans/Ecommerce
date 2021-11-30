@@ -73,9 +73,37 @@ class ListOrdersSerializer(serializers.ModelSerializer):
 
     class Meta:
         fields = ["id",
-                "order_username",
+                 "order_username",
                  "order_date",
                   "order_state",
                   "details"]
         model = Order
 
+class createOrder(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = [
+            'id',
+            'order_date',
+            'order_state',
+            'order_user'
+        ]
+
+
+class detailCreateOrder(serializers.ModelSerializer):
+    class Meta:
+        fields = ["id","articulo_pedido","order"]
+        model = detallePedido
+
+class createOrderDetails(serializers.Serializer):
+    details = detailCreateOrder(many=True)
+
+    def create(self, validated_data):
+        data = validated_data.pop('details')
+        rta = {
+            "details":[]
+        }
+        for detalle in data:
+            res = detallePedido.objects.create(**detalle)
+            rta["details"].append(res)
+        return rta
