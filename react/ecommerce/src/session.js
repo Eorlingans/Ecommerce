@@ -17,6 +17,7 @@ export const SessionContextProvider = ({children}) => {
         // elimino el token y si es staff
         localStorage.removeItem("token")
         localStorage.removeItem("user_is_staff")
+        localStorage.removeItem("user_id")
     }
     const values = {isLoggedIn, isUserStaff, Logout}
     return (

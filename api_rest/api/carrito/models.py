@@ -16,7 +16,7 @@ class category(models.Model):
 
 
 class weapon(models.Model):
-    arm_category = models.ForeignKey(category, on_delete=models.CASCADE)
+    arm_category = models.ForeignKey(category, on_delete=models.RESTRICT)
     arm_name = models.TextField(max_length=20)
     arm_price = models.FloatField(default=0.00)
     arm_origin = models.TextField(max_length=20)
@@ -38,7 +38,7 @@ class weapon(models.Model):
 
 
 class Order(models.Model):
-    order_user = models.ForeignKey(user_profile, on_delete=models.CASCADE)
+    order_user = models.ForeignKey(user_profile, on_delete=models.RESTRICT)
     order_date = models.DateField(default=datetime.date.today())
     order_state = models.IntegerField(default=0)
 
@@ -53,5 +53,5 @@ class Order(models.Model):
 class orderdetail(models.Model):
     # Desde aca identifico mediante realated name como lo voy a nombrar desde order, en el serializer
     # no se agrega en el modelo, unicamente en el serializer
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='details')
-    order_article = models.ForeignKey(weapon, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.RESTRICT, related_name='details')
+    order_article = models.ForeignKey(weapon, on_delete=models.RESTRICT)
