@@ -38,12 +38,18 @@ class DetailArmas(generics.RetrieveDestroyAPIView):
     serializer_class = weaponSerializer
 
 
-def get_gun_by_category(arm_category,search=None):
-    queryset = weapon.objects.filter(arm_category=arm_category)
+def get_gun_by_category(arm_category=None,search=None):
+    if arm_category is None:
+        queryset = weapon.objects.all()
+    else:
+        queryset= weapon.objects.filter(arm_category=arm_category)
 
     if search is not None:
         queryset = queryset.filter(
-            Q(arm_description__icontains=search) | Q(arm_name__icontains=search)
+            (
+                    Q(arm_name__icontains=search) | Q(arm_description__icontains=search) |
+                    Q(arm_origin__icontains=search) | Q(arm_speed__icontains=search)
+            )
         )
     return queryset
 
@@ -151,19 +157,7 @@ class WeaponsFilter(generics.ListAPIView):
     serializer_class = weaponSerializer
 
     def get_queryset(self):
-        queryset = weapon.objects.all()
-
         params = self.request.query_params
-        weapon_name = params.get('weapon')
-        stars = params.get('stars')
-        description = params.get('desc')
+        search = params.get('search')
 
-        if weapon_name is not None:
-            queryset = queryset.filter(arm_name=weapon_name)
-        if stars is not None:
-            queryset = queryset.filter(arm_assessment__gte=stars)
-        if description is not None:
-            queryset = queryset.filter(
-                Q(arm_description__icontains=description) | Q(arm_name__icontains=description)
-            )
-        return queryset
+        return get_gun_by_category(arm_category=None, search=search)

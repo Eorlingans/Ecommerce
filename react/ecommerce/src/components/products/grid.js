@@ -25,11 +25,12 @@ const ActualSearchComponent = ({search}) => (
 const NotFoundSearchComponent = () => (
     <div style={{color: "white"}}>Nothing here</div>
 )
-function GridArmas() {
+function GridArmas({ home = false }) {
     let {categoria} = useParams();
     const {mutate} = useSWRConfig()
     const { search } = useSearchContext()
-    const {data, error} = useSWR(`http://localhost:8000/api/v1/${categoria}/?search=${search}`, fetcher)
+    let endpoint = `http://localhost:8000/api/v1/${ home?"weapons":`${categoria}/`}?search=${search}`
+    const {data, error} = useSWR(endpoint, fetcher)
 
     useEffect(() => {
         mutate(`http://localhost:8000/api/v1/${categoria}/?search=${search}`, data);
@@ -49,7 +50,7 @@ function GridArmas() {
                     )
                 }
                 {
-                    data && data.length === 0 ?
+                    data && data.length === 0 && search !== '' ?
                         <NotFoundSearchComponent /> :
                         <Grid container spacing={{xs: 0, md: 1}} columns={{xs: 1, sm: 4, md: 16}}>
                             {error && <h2>Hubo un error... {error?.message}</h2>}

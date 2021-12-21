@@ -22,6 +22,6 @@ urlpatterns = [
     path('Rifles/', Rifles.as_view(), name='Rifles'),
     path('Machineguns/', Machineguns.as_view(), name="Machineguns"),
     path('Equipment/', Equipment.as_view(), name="Equipment"),
-    path('search', WeaponsFilter.as_view()),
+    path('weapons', WeaponsFilter.as_view()),
 
 ]
