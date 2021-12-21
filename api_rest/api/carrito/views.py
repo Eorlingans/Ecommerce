@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework import authentication, status
@@ -37,46 +38,69 @@ class DetailArmas(generics.RetrieveDestroyAPIView):
     serializer_class = weaponSerializer
 
 
+def get_gun_by_category(arm_category,search=None):
+    queryset = weapon.objects.filter(arm_category=arm_category)
+
+    if search is not None:
+        queryset = queryset.filter(
+            Q(arm_description__icontains=search) | Q(arm_name__icontains=search)
+        )
+    return queryset
+
 class Pistolas(generics.ListAPIView):
     serializer_class = weaponSerializer
 
     def get_queryset(self):
-        return weapon.objects.filter(arm_category=1)
+        arm_category=1
+        params = self.request.query_params
+        search = params.get("search")
+        return get_gun_by_category(arm_category=arm_category,search=search)
 
 
 class Shotguns(generics.ListAPIView):
     serializer_class = weaponSerializer
 
     def get_queryset(self):
-        return weapon.objects.filter(arm_category=2)
-
+        arm_category = 2
+        params = self.request.query_params
+        search = params.get("search")
+        return get_gun_by_category(arm_category=arm_category, search=search)
 
 class Submachines(generics.ListAPIView):
     serializer_class = weaponSerializer
 
     def get_queryset(self):
-        return weapon.objects.filter(arm_category=3)
+        arm_category = 3
+        params = self.request.query_params
+        search = params.get("search")
+        return get_gun_by_category(arm_category=arm_category, search=search)
 
 
 class Rifles(generics.ListAPIView):
     serializer_class = weaponSerializer
 
     def get_queryset(self):
-        return weapon.objects.filter(arm_category=4)
+        arm_category = 4
+        params = self.request.query_params
+        search = params.get("search")
+        return get_gun_by_category(arm_category=arm_category, search=search)
 
 
 class Machineguns(generics.ListAPIView):
     serializer_class = weaponSerializer
 
     def get_queryset(self):
-        return weapon.objects.filter(arm_category=5)
+        arm_category = 5
+        params = self.request.query_params
+        search = params.get("search")
+        return get_gun_by_category(arm_category=arm_category, search=search)
 
 
 class Equipment(generics.ListAPIView):
     serializer_class = weaponSerializer
 
     def get_queryset(self):
-        return weapon.objects.filter(arm_category=6)
+        return get_gun_by_category(arm_category=6)
 
 
 class Orders(generics.RetrieveDestroyAPIView):
@@ -121,3 +145,25 @@ class CreateOrder(generics.CreateAPIView):
 class CreateOrderDetails(generics.CreateAPIView):
     serializer_class = createOrderDetails
     queryset = orderdetail.objects.all()
+
+
+class WeaponsFilter(generics.ListAPIView):
+    serializer_class = weaponSerializer
+
+    def get_queryset(self):
+        queryset = weapon.objects.all()
+
+        params = self.request.query_params
+        weapon_name = params.get('weapon')
+        stars = params.get('stars')
+        description = params.get('desc')
+
+        if weapon_name is not None:
+            queryset = queryset.filter(arm_name=weapon_name)
+        if stars is not None:
+            queryset = queryset.filter(arm_assessment__gte=stars)
+        if description is not None:
+            queryset = queryset.filter(
+                Q(arm_description__icontains=description) | Q(arm_name__icontains=description)
+            )
+        return queryset

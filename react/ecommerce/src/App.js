@@ -15,7 +15,9 @@ import {EditCategory} from "./components/Edits/EditCategory";
 
 
 const themes = createTheme({
-    palette: {mode: 'dark'},
+    palette: {
+        mode: 'dark'
+    },
     typography: {
         fontFamily: 'Quantico, Changa',
     },

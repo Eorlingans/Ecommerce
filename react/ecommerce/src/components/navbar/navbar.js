@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {makeStyles} from '@material-ui/core/styles';
 import {Link, useHistory} from "react-router-dom";
 import {Container, Nav, Navbar, NavDropdown,} from 'react-bootstrap';
-import {IconButton} from '@mui/material';
+import {IconButton, InputAdornment, TextField} from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {useStateValue} from '../../StateProvider';
 import Badge from '@material-ui/core/Badge/Badge';
@@ -12,6 +12,8 @@ import Badge from '@material-ui/core/Badge/Badge';
 import "./navbar.css";
 import {SessionContext} from "../../session";
 import {LogoutOutlined} from "@mui/icons-material";
+import {Search} from "@material-ui/icons";
+import {useSearchContext} from "../../SearchContext";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,13 +23,39 @@ const useStyles = makeStyles((theme) => ({
         marginRight: '6px',
 
     },
-
+    SearchBox: {
+        width: "100%",
+        margin:"0 3%"
+    },
+    SearchIcon: {
+      "& .MuiSvgIcon-root":{
+          marginTop:"-6px",
+          fontSize:"1.4rem"
+      }
+    },
+    SearchWeapons: {
+        height:"42px",
+        "& label":{
+            color: "#AC4E00",
+            marginTop:"-6px",
+            "&.Mui-focused":{
+                color: "#AC4E00",
+            },
+        },
+        "& .MuiInput-root":{
+          marginTop:"12px",
+        },
+        "& input":{
+            color: "#ED6C02",
+        }
+    }
 
 }));
 
 
 function Navegacion() {
     const classes = useStyles();
+    const { search, setSearch } = useSearchContext()
     const history = useHistory();
     const [{basket}, dispatch] = useStateValue();
     const {isLoggedIn, isUserStaff, Logout} = useContext(SessionContext)
@@ -36,7 +64,9 @@ function Navegacion() {
         Logout()
         history.push("/Login")
     }
-
+    const handleSearchChange = ({target: { value }}) => {
+        setSearch(value)
+    }
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
             <Container>
@@ -71,6 +101,24 @@ function Navegacion() {
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
+                    <div className={classes.SearchBox}>
+                        <TextField
+                            id="search"
+                            label="Search Product"
+                            fullWidth
+                            variant="standard"
+                            color="warning"
+                            onChange={handleSearchChange}
+                            className={classes.SearchWeapons}
+                            InputProps={{
+                                endAdornment:
+                                    <InputAdornment className={classes.SearchIcon} position="end" sx={{color:"#AC4E00"}}>
+                                        <Search/>
+                                    </InputAdornment>
+                            }}
+                            size="small"
+                        />
+                    </div>
                     <Nav>
                         {
                             isLoggedIn() &&
@@ -98,7 +146,6 @@ function Navegacion() {
 
                         <Link to="/ShoppingCart">
                             <IconButton>
-                                {console.log(basket, basket?.length)}
                                 <Badge className={classes.Badge} badgeContent={basket?.length}>
                                     {<ShoppingCartIcon color="warning"/>}
                                 </Badge>

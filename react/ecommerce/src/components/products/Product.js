@@ -62,21 +62,20 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Product({
-                                    id,
-                                    arm_catergoria,
-                                    arm_nombre,
-                                    arm_precio,
-                                    arm_foto,
-                                    arm_valoracion,
-                                    arm_descripcion,
-                                    arm_origen,
-                                    arm_calibre,
-                                    arm_tiemporecarga,
-                                    arm_velocidad,
-                                    arm_capacidad,
-                                    arm_peso
-
-                                }) {
+    id,
+    arm_catergoria,
+    arm_nombre,
+    arm_precio,
+    arm_foto,
+    arm_valoracion,
+    arm_descripcion,
+    arm_origen,
+    arm_calibre,
+    arm_tiemporecarga,
+    arm_velocidad,
+    arm_capacidad,
+    arm_peso
+}) {
     const classes = useStyles();
     const [{basket}, dispatch] = useStateValue();
 

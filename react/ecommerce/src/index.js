@@ -6,13 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import {StateProvider} from './StateProvider';
 import reducer, {initialState} from './reducer';
 import {SessionContextProvider} from "./session";
+import {SearchContextProvider} from "./SearchContext";
 
 ReactDOM.render(
     <React.StrictMode>
         <SessionContextProvider>
-            <StateProvider initialState={initialState} reducer={reducer}>
-                <App/>
-            </StateProvider>
+            <SearchContextProvider>
+                <StateProvider initialState={initialState} reducer={reducer}>
+                    <App/>
+                </StateProvider>
+            </SearchContextProvider>
         </SessionContextProvider>
     </React.StrictMode>,
     document.getElementById('root')
