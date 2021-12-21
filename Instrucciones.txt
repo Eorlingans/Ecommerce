@@ -1,0 +1,19 @@
+- Instalar MySql
+- Ejecutar el archivo SQL que se encuentra en Ecommerce\Ecommerce\api_rest\api\SQL INSERTS
+- En el archivo \Ecommerce\api_rest\api\api\settings.py agregar datos de la DB, por defecto:
+{
+    'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'ecommerce_armas',
+            'USER': 'root',
+            'PASSWORD': 'root',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
+}
+
+-Ejecutar el venv de en el api, e iniciar el servidor
+
+-------------------------------------------------------------------------------
+-Ir a la carpeta de react e instalar las dependencias
+-iniciar el servidor
